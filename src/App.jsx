@@ -29,6 +29,20 @@ function App() {
     const remainingWorkouts = workouts[nextCategory].filter(
       workout => !workoutHistory.some(history => history.name === workout)
     );
+
+    // Check if all workouts in both categories have been completed
+    const allUpperBodyCompleted = workouts.upperBody.every(
+      workout => workoutHistory.some(history => history.name === workout)
+    );
+    const allOtherCompleted = workouts.other.every(
+      workout => workoutHistory.some(history => history.name === workout)
+    );
+
+    // If all workouts in both categories have been completed, reset the whole cycle
+    if (allUpperBodyCompleted && allOtherCompleted) {
+      setWorkoutHistory([]);
+      return { name: workouts.upperBody[0], category: 'upperBody' };
+    }
       
     // If all workouts in the category have been completed, reset the cycle for that category
     const nextWorkout = remainingWorkouts.length > 0 
