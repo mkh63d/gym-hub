@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 
 const workouts = {
-  upperBody: ['Chest', 'Back', 'Shoulders', 'Bicep', 'Tricep', 'Forarms'],
+  upperBody: ['Chest', 'Back', 'Shoulders', 'Bicep', 'Tricep'],
   other: ['Cardio', 'Mobility', 'Core', 'Legs']
 };
 
