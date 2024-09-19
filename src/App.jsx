@@ -9,12 +9,9 @@ const workouts = {
 function App() {
   // Track workout history
   const [workoutHistory, setWorkoutHistory] = useState([]);
-
-  // Track selected body part
-  const [selectedBodyPart, setSelectedBodyPart] = useState('upperBody');
   
-  // Calculate the next possible workouts
-  const getNextWorkouts = () => {
+  // Calculate the next workout
+  const getNextWorkout = () => {
     const lastWorkout = workoutHistory[workoutHistory.length - 1];
 
     // Determine the last category worked on (upperBody or other)
@@ -48,17 +45,17 @@ function App() {
     }
       
     // If all workouts in the category have been completed, reset the cycle for that category
-    const nextWorkouts = remainingWorkouts.length > 0 
+    const nextWorkout = remainingWorkouts.length > 0 
       ? remainingWorkouts[0] 
       : workouts[nextCategory][0];
       
-    // Recommend the next body parts that haven't been worked out yet
-    return { name: nextWorkouts, category: nextCategory };
+    // Recommend the next body part that hasn't been worked out yet
+    return { name: nextWorkout, category: nextCategory };
   };
-
+ 
   // Log the next workout and add it to the history
   const logWorkout = () => {
-    const nextWorkout = getNextWorkouts();
+    const nextWorkout = getNextWorkout();
     setWorkoutHistory([...workoutHistory, nextWorkout]);
   };
  
@@ -71,7 +68,7 @@ function App() {
     <div className="App">
       <h1>Workout Assistant</h1>
       <p>Last workout: {workoutHistory[workoutHistory.length - 1]?.name || 'None'}</p>
-      <p>Next workout: {getNextWorkouts().name}</p>
+      <p>Next workout: {getNextWorkout().name}</p>
  
       <button onClick={logWorkout}>Log Next Workout</button>
       <button onClick={resetWorkouts}>Reset Workouts</button>
